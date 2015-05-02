@@ -22,7 +22,7 @@ class keyPair:
         Randall = random()
         self.private = privateKey(Randall.randint(1,curve.order-1))
         self.public = publicKey(self.EC.mult(curve.generator, self.private.multiplier, curve))
-        print(self.private.multiplier, self.public.point)
+        return(self.private.multiplier, self.public.point)
 
 class Encoder:
     EC = ECmath.funcs()
