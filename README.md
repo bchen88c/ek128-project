@@ -1,3 +1,3 @@
-# ek128-project-1
+# ek128-project
 
 ECC project
