@@ -18,7 +18,7 @@ class privateKey:
 
 class keyPair:
     EC = ECmath.funcs()
-    def generate(self, curve):
+    def generate(self, curve):              #Generates public/private key. Public is a point, private is a number
         Randall = random()
         self.private = privateKey(Randall.randint(1,curve.order-1))
         self.public = publicKey(self.EC.mult(curve.generator, self.private.multiplier, curve))
@@ -38,13 +38,13 @@ class Encoder:
         S = sum(self.EC.mult(R, privateKey.multiplier, curve))
         return S
 
-    def encode(self, publicKey, curve, message):
+    def encode(self, publicKey, curve, message):            #Encodes the message
         i = self.pad(message)
         secret = self.genSharedSecret(publicKey, curve)
         transmit = (secret[0],secret[1]+i)
         return transmit
 
-    def decode(self, privateKey, curve, transmitted):
+    def decode(self, privateKey, curve, transmitted):       #decodes the message
         S = self.findSharedSecret(privateKey, transmitted[0],curve)
         message = self.unpad(transmitted[1]-S)
         return message
